@@ -1,9 +1,36 @@
-const mongoose = require('mongoose')
 const Estudio = require('../models/estudio')
 
+const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+
+const SECRET = process.env.SECRET
+
 const getAll = async (req, res) => {
+    // criar autenticação
+    // trazeer token do header da requisição
+    // verificar se ele existe
+      // retornar erro caso não exista
+  // caso exista e for válido, enviar a lista como resposta
+
+  // verificar token enviado com o token salvo no env
+  const authHeader = req.get('authorization')
+  // console.log(authHeader)
+
+  //fazer split para acessar o token propriamente dito
+  const token = authHeader.split(' ')[1];
+  // console.log(token)
+  if (!token) {
+    return res.status(401).send("Kd o autorizationnn")
+  }
   const estudios = await Estudio.find()
-  res.json(estudios)
+  res.status(200).send(estudios)
+
+  jwt.verify(token, SECRET, (e) => {
+    if (e) {
+      res.status(403).send({ message: 'Token não válido', e })
+    } 
+      res.status(200).send(estudios)   
+  })
 }
 
 const createStudio = async (req, res) => {

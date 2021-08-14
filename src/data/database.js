@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
-const connect = () => {mongoose.connect(
-  'mongodb://localhost:27017/filmes-db', {
+// console.log(process.env)
+
+const mongoUrl = process.env.MONGODB_URL
+const connect = () => {mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
