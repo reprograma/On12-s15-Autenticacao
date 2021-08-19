@@ -19,4 +19,8 @@ app.use('/titulos', titulosRouter)
 const usuariasRouter = require('./src/routes/usuarias.routes')
 app.use('/usuarias', usuariasRouter)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> afef92b (criando camadas de segurança a API)
 app.listen(3333, () => console.log('listening on port 3333'))

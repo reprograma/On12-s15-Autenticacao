@@ -15,4 +15,8 @@ const usuariasSchema = new mongoose.Schema({
   }
 })
 
+<<<<<<< HEAD
 module.exports = mongoose.model('usuarias', usuariasSchema)
+=======
+module.exports = mongoose.model('usuarias', usuariasSchema)
+>>>>>>> afef92b (criando camadas de segurança a API)
