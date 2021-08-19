@@ -8,6 +8,8 @@ router.get('/', controller.getAll)
 //criar um novo estudio/post/save
 router.post('/', controller.createStudio)
 
+router.post('/login',controller.createLogin)
+
 //listar um estudio/get/findById
 
 //atualizar uma informacao especifica num estudio/patch/findById/save

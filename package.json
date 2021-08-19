@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "projeto-db",
+=======
+  "name": "projetodb",
+>>>>>>> afef92b (criando camadas de segurança a API)
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+const mongoose = require('mongoose')
+>>>>>>> afef92b (criando camadas de segurança a API)
 const Usuaria = require('../models/usuarias')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -9,6 +13,11 @@ const create = async (req, res) => {
 
   const usuaria = new Usuaria(req.body)
 
+<<<<<<< HEAD
+=======
+  console.log(new Usuaria)
+
+>>>>>>> afef92b (criando camadas de segurança a API)
   try {
     const novaUsuaria = await usuaria.save()
     res.status(201).json(novaUsuaria)
@@ -19,6 +28,7 @@ const create = async (req, res) => {
 
 const login = (req, res) => {
   Usuaria.findOne({ email: req.body.email }, (err, usuariaEncontrada) => {
+<<<<<<< HEAD
     // console.log(usuariaEncontrada)
     if (!usuariaEncontrada) {
       return res.status(404).send({ message: 'Usuária não encontrada', email: `${req.body.email}`})
@@ -28,6 +38,17 @@ const login = (req, res) => {
 
     const senhaValida = bcrypt.compareSync(req.body.senha, usuariaEncontrada.senha)
     // console.log(senhaValida)
+=======
+    console.log(usuariaEncontrada)
+    if (!usuariaEncontrada) {
+      return res.status(404).send({ message: 'Usuária não encontrada', email: `${req.body.email}`})
+    }
+    console.log('SENHA DO BODY', req.body.senha)
+    console.log('SENHA DO BANCO', usuariaEncontrada.senha)
+
+    const senhaValida = bcrypt.compareSync(req.body.senha, usuariaEncontrada.senha)
+    console.log(senhaValida)
+>>>>>>> afef92b (criando camadas de segurança a API)
 
     if (!senhaValida) {
       return res.status(401).send({message: "Login não autorizado"})

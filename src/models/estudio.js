@@ -10,6 +10,10 @@ const estudioSchema = new mongoose.Schema({
     type: Date,
     required: true,
     default: new Date
+  },
+  senha: {
+    type: String,
+    required: true
   }
 })
 
