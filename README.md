@@ -122,13 +122,13 @@ Vamos lá!
 2. Buscar usuária a partir do email recebido na request, e mostrar um erro 404 caso não encontre
 `$ Usuarias.findOne({ email: req.body.email }, function(error, usuaria) {...}`
 
-3. Comparar senha de usuária encontra com a senha recebida via request, e mostrar um erro 401 caso seja diferente
+3. Comparar senha de usuária encontra com a senha recebida via request, e mostrar um erro 401 caso seja diferente(duvida)
 `$ bcrypt.compareSync(request.body.senha, usuariaEncontrada.senha);`
 
 4. Fazer require do plugin JWT
 `$ const jwt = require('jsonwebtoken');`
 
 5. Importar SECRET e gerar token JWT a partir do nome e secret e devolver na request
-`$ jwt.sign({ name: usuaria.name }, SECRET);`
+`$ jwt.sign({ name: usuaria.name }, SECRET);`(divida)
 
-6. Bater na rota `getAll` via Postman com o token gerado
+6. Bater na rota `getAll` via Postman com o token gerado(duvida)

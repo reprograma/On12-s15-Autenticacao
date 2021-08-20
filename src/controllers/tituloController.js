@@ -1,11 +1,27 @@
 const mongoose = require('mongoose')
 const Titulo = require('../models/titulo')
+const jwt = require('jsonwebtoken')
+
+const SECRET = process.env.SECRET
 
 const getAll = async (req, res) => {
-  const titulos = await Titulo.find().populate('estudio')
-  res.status(200).json(titulos)
-}
+  const authHeader = req.get('authorization');
+  const token = authHeader.split(' ')[1]
 
+  if (!token) {
+    return res.status(403).send({message: "Kd a authorizationnn"})
+  }
+
+  // essa parte ainda não entendi oq faz
+  jwt.verify(token, SECRET, async (err) => {
+    if (err) {
+      res.status(403).send({message: 'token não é valido', err})
+    }
+
+  const titulos = await Titulo.find()
+  res.status(200).json(titulos)
+  })
+}
 const createTitle = async (req, res) => {
   const titulo = new Titulo({
     _id: new mongoose.Types.ObjectId(),
