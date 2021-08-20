@@ -99,6 +99,7 @@ Vamos lá!
 
 4. Criar uma usuaria de teste via Postman
 
+
 -----------------------------------------------------------------------------------------------
 ### Criptografar senha das usuárias
 
@@ -132,3 +133,35 @@ Vamos lá!
 `$ jwt.sign({ name: usuaria.name }, SECRET);`
 
 6. Bater na rota `getAll` via Postman com o token gerado
+
+OLA! Nosso desafio essa semana foi criar estudio e titulos via postman com autenticação (token)
+  
+  ESTUDIO CRIADO
+  {
+    "criadoEm": "2021-08-19T12:47:55.419Z",
+    "_id": "611e62979eea4237f08c6f75",
+    "nome": "Globo Filmes",
+    "__v": 0
+}
+ 
+  TITULO CRIADO                                   
+{
+    "criadoEm": "2021-08-19T12:47:55.607Z",
+    "_id": "611e53ee9eea4237f08c6f6f",
+    "nome": "pantera e catita",
+    "genero": "acao",
+    "descricao": "otimo",
+    "estudio": "61159490b367853bc0a9c119",
+    "__v": 0
+}
+
+ Criar uma usuaria de teste via Postman
+
+{
+   "_id": "611e5e819eea4237f08c6f71",
+    "nome": "Rivania",
+    "email": "rbghv@nh.com",
+    "senha": "$2b$10$jhTM9oauHb9N/ex85PImPOVEQWt2DjPloM/x2IOCjUjmKGH0kI7d6",
+    "__v": 0
+
+}

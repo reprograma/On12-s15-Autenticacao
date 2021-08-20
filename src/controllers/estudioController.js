@@ -1,12 +1,32 @@
 const mongoose = require('mongoose')
 const Estudio = require('../models/estudio')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const SECRET =  process.env.SECRET 
+
 
 const getAll = async (req, res) => {
-  const estudios = await Estudio.find()
-  res.json(estudios)
+  const authHeader = req.get('authorization');
+  const token = authHeader.split(' ')[1]
+  // console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Kd a tokenzinnn"})
+  }
+  
+  jwt.verify(token, SECRET, async (err) => {
+    if (err) {
+      res.status(403).send({ message: 'Token não válido', err})
+    }
+
+    const estudios = await Estudio.find()
+    res.json(estudios)
+  })
 }
 
-const createStudio = async (req, res) => {
+const createEstudio = async (req, res) => {
+  const auth = req.get('authorization')
+
   const estudio = new Estudio({
     _id: new mongoose.Types.ObjectId(),
     nome: req.body.nome,
@@ -24,7 +44,13 @@ const createStudio = async (req, res) => {
   }
 }
 
+
+
+
+
+
 module.exports = {
   getAll,
-  createStudio
+  createEstudio,
+ 
 }

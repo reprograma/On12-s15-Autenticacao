@@ -1,4 +1,8 @@
 const mongoose = require('mongoose')
+const MONGODB = process.env.MONGODB_URL
+
+// console.log(process.env)
+// console.log('MONGO URL', MONGODB)
 
 const connect = () => {mongoose.connect(
   'mongodb://localhost:27017/filmes-db', {
