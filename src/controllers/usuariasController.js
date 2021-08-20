@@ -19,24 +19,19 @@ const create = async (req, res) => {
 
 const login = (req, res) => {
   Usuaria.findOne({ email: req.body.email }, (err, usuariaEncontrada) => {
-    // console.log(usuariaEncontrada)
+    
     if (!usuariaEncontrada) {
       return res.status(404).send({ message: 'Usuária não encontrada', email: `${req.body.email}`})
     }
-    // console.log('SENHA DO BODY', req.body.senha)
-    // console.log('SENHA DO BANCO', usuariaEncontrada.senha)
 
     const senhaValida = bcrypt.compareSync(req.body.senha, usuariaEncontrada.senha)
-    // console.log(senhaValida)
-
     if (!senhaValida) {
       return res.status(401).send({message: "Login não autorizado"})
     }
-
+      //token de acesso
     const token = jwt.sign({email: req.body.email}, SECRET)
     res.status(200).send({ messagem: "Login realizado com sucesso", token: token})
-})
-
+  })
 }
 
 module.exports = { create, login }
