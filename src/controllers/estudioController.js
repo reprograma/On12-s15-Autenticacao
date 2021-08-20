@@ -4,11 +4,9 @@ const jwt = require('jsonwebtoken')
 
 const SECRET = process.env.SECRET
 
-
 const getAll = async (req, res) => {
   const authHeader = req.get('authorization');
   const token = authHeader.split(' ')[1]
-  // console.log(token)
 
   if (!token) {
     return res.status(403).send({message: "Kd a tokenzinnn"})
@@ -20,12 +18,22 @@ const getAll = async (req, res) => {
       res.status(403).send({ message: 'Token não válido', err})
     }
 
-    const estudios = await Estudio.find()
+    const estudios = await Estudio.find() //RESPOSTA
     res.json(estudios)
   })
 }
 
 const createStudio = async (req, res) => {
+  const authHeader = req.get('authorization')
+  const token = authHeader.split(' ')[1]
+  if(!token){
+    return res.status(403).send({ message: "Requer autorização"})
+  }
+  jwt.verify(token, SECRET, async (err) => {
+    if(err){
+      res.status(403).send({ message: 'Token não válido', err})
+    }
+
   const estudio = new Estudio({
     _id: new mongoose.Types.ObjectId(),
     nome: req.body.nome,
@@ -41,6 +49,7 @@ const createStudio = async (req, res) => {
   } catch(err) {
     res.status(400).json({ message: err.message})
   }
+  })
 }
 
 module.exports = {
