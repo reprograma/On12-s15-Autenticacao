@@ -1,7 +1,7 @@
 {
   "name": "projeto-db",
   "version": "1.0.0",
-  "description": "",
+  "description": "Para executar este projeto, você deverá ter instalado o Node.js e as dependências do npm. Será necessário ter instalado o banco de dados Mongodb e suas configurações. Além disso, iremos fazer requisições na API com a plataforma Postman.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -17,5 +17,13 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.5",
     "nodemon": "^2.0.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omahin/On12-s15-Autenticacao.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omahin/On12-s15-Autenticacao/issues"
+  },
+  "homepage": "https://github.com/omahin/On12-s15-Autenticacao#readme"
 }
