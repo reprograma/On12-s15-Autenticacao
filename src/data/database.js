@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+require('dotenv-safe').config()
 
-const connect = () => {mongoose.connect(
-  'mongodb://localhost:27017/filmes-db', {
+const MONGOURL = process.env.MONGODB_URL
+const connect = () => {mongoose.connect(MONGOURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
