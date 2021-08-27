@@ -4,28 +4,35 @@ const jwt = require('jsonwebtoken')
 
 const SECRET = process.env.SECRET
 
-
 const getAll = async (req, res) => {
   const authHeader = req.get('authorization');
   const token = authHeader.split(' ')[1]
-  // console.log(token)
 
   if (!token) {
     return res.status(403).send({message: "Kd a tokenzinnn"})
   }
-  // usar método do jwt para autenticar a rota
-    // verificação do token com o SECRET do projeto
+
   jwt.verify(token, SECRET, async (err) => {
     if (err) {
       res.status(403).send({ message: 'Token não válido', err})
     }
 
-    const estudios = await Estudio.find()
+    const estudios = await Estudio.find() 
     res.json(estudios)
   })
 }
 
 const createStudio = async (req, res) => {
+  const authHeader = req.get('authorization')
+  const token = authHeader.split(' ')[1]
+  if(!token){
+    return res.status(403).send({ message: "Solicita autorização"})
+  }
+  jwt.verify(token, SECRET, async (err) => {
+    if(err){
+      res.status(403).send({ message: 'Token inválido', err})
+    }
+
   const estudio = new Estudio({
     _id: new mongoose.Types.ObjectId(),
     nome: req.body.nome,
@@ -33,7 +40,7 @@ const createStudio = async (req, res) => {
   })
   const estudioJaExiste = await Estudio.findOne({nome: req.body.nome})
   if (estudioJaExiste) {
-    return res.status(409).json({error: 'Estudio ja cadastrado.'})
+    return res.status(409).json({error: 'Já existe cadastro para este estudio!'})
   }
   try{
     const novoEstudio = await estudio.save()
@@ -41,6 +48,7 @@ const createStudio = async (req, res) => {
   } catch(err) {
     res.status(400).json({ message: err.message})
   }
+  })
 }
 
 module.exports = {
